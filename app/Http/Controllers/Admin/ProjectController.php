@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -15,9 +16,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        // $projects = Project::all();
+        $projects = Project::all();
 
-        return view("admin.projects.index");
+        return view("admin.projects.index", compact('projects'));
     }
 
     /**
@@ -40,13 +41,15 @@ class ProjectController extends Controller
     {
         $data = $request->all();
 
+        $path = Storage::put("projects", $data['cover_img']);
+
         $project = new Project();
         $project->name = $data["name"];
         $project->description = $data["description"];
-        $project->cover_img = $data["cover_img"];
-        $project->github_link = $data["github_link"]->nullable();
+        $project->cover_img = $path;
+        $project->github_link = $data["github_link"];
         $project->save();
-        return redirect()->route("admin.projects.show", $project->id);
+        return redirect()->route("projects.show", $project->id);
     }
 
     /**
@@ -80,13 +83,13 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, Project $project)
+    public function update(Request $request, Project $project)
     {
 
         $data = $request->all();
 
         $project->update($data);
-        return redirect()->route('admin.projects.show', $project->id);
+        return redirect()->route('projects.show', $project->id);
     }
 
     /**
@@ -97,6 +100,8 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->delete();
+        return redirect()->route("projects.index");
     }
 }

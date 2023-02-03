@@ -3,12 +3,12 @@
 @section('content')
 <div class="my-5">
     <div class="text-center my-5">
-        <h1 class="text-info">{{ $project->name }} Nome: </h1>
+        <h1 class="">Progetto: {{ $project->name }} </h1>
     </div>
     <div class="row align-items-center">
         <div class="col-2">
-            <div >
-                <img class="img-fluid" src="{{ $project->cover_img }}" alt="">
+            <div>
+                <img class="img-fluid" src="{{ asset('/storage/' . $project->cover_img) }}" alt="">
             </div>
         </div>
         <div class="col">

@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Modifica progettto {{ $project->id }}</h1>
-
-<form action="{{ route('projects.update', $project->id) }}" method="POST">
+<h1>Modifica progetto {{ $project->id }}</h1>
+<form action="{{ route('projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
-    @method('put')
+    @method('PUT')
 
     <div class="mb-3">
         <label class="form-label">Nome</label>
@@ -17,12 +16,12 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Immagine</label>
-        <input type="text" class="form-control" name="cover_img" value="{{ $project->cover_img }}">
+        <input type="file" class="form-control" name="cover_img" value="{{ $project->cover_img }}">
     </div>
     <div class="mb-3">
-        <label class="form-label">Nome</label>
+        <label class="form-label">Link GitHub</label>
         <input type="text" class="form-control" name="github_link" value="{{ $project->github_link }}">
     </div>
-    <button class="btn btn-info text-white" type="submit">Salva prodotto</button>
+    <button class="btn btn-info text-white" type="submit">Salva progetto</button>
 </form>
 @endsection
