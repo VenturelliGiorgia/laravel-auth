@@ -29,17 +29,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix("admin")
-    ->name("admin.")
-    ->group(function(){
-        Route::get("/", [ProjectController::class, "index"])->name("index");
-        Route::get("/create", [ProjectController::class, "create"])->name("create");
-        Route::post("/", [ProjectController::class, "store"])->name("store");
-        Route::get("/{project}", [ProjectController::class, "show"])->name("show");
-        Route::get("/{project}/edit", [ProjectController::class, "edit"])->name("edit");
-        Route::put("/{project}", [ProjectController::class, "update"])->name("update");
-        Route::delete("/{project}", [ProjectController::class, "destroy"])->name("destroy");
-    });
+// Route::prefix("admin.")
+//     ->name("admin.")
+//     ->group(function(){
+//         Route::get("/", [ProjectController::class, "index"])->name("index");
+//         Route::get("/create", [ProjectController::class, "create"])->name("create");
+//         Route::post("/", [ProjectController::class, "store"])->name("store");
+//         Route::get("/{project}", [ProjectController::class, "show"])->name("show");
+//         Route::get("/{project}/edit", [ProjectController::class, "edit"])->name("edit");
+//         Route::put("/{project}", [ProjectController::class, "update"])->name("update");
+//         Route::delete("/{project}", [ProjectController::class, "destroy"])->name("destroy");
+//     });
 
+Route::get("/", [ProjectController::class, "index"])->name("projects.index");
+Route::get("/projects/create", [ProjectController::class, "create"])->name("projects.create");
+Route::post("/projects", [ProjectController::class, "store"])->name("projects.store");
+Route::get("/projects/{project}", [ProjectController::class, "show"])->name("projects.show");
+Route::get("/projects/{project}/edit", [ProjectController::class, "edit"])->name("projects.edit");
+Route::put("/projects/{project}", [ProjectController::class, "update"])->name("projects.update");
+Route::delete("/projects/{project}", [ProjectController::class, "destroy"])->name("projects.destroy");
 
 require __DIR__ . '/auth.php';

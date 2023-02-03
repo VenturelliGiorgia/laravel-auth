@@ -46,6 +46,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
                         </li>
+                        <li class="nav-item">
+<a class="nav-link" href="{{route("projects.index")}}">{{ __('Lista Progetti') }}</a>                        </li>
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -84,7 +87,7 @@
             </div>
         </nav>
 
-        <main class="">
+        <main class="container">
             @yield('content')
         </main>
     </div>

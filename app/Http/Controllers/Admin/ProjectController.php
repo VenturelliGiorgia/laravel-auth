@@ -15,9 +15,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        // $projects = Project::all();
 
-        return view("admin.index", compact('projects'));
+        return view("admin.projects.index");
     }
 
     /**
@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view("admin.create");
+        return view("admin.projects.create");
     }
 
     /**
@@ -46,7 +46,7 @@ class ProjectController extends Controller
         $project->cover_img = $data["cover_img"];
         $project->github_link = $data["github_link"]->nullable();
         $project->save();
-        return redirect()->route("projects.show", $project->id);
+        return redirect()->route("admin.projects.show", $project->id);
     }
 
     /**
@@ -57,7 +57,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view("admin.show", compact('project'));
+        return view("admin.projects.show", compact('project'));
     }
 
     /**
@@ -70,7 +70,7 @@ class ProjectController extends Controller
     {
 
         $project = Project::find($id);
-        return view("admin.edit", compact("project"));
+        return view("admin.projects.edit", compact("project"));
     }
 
     /**
@@ -86,7 +86,7 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $project->update($data);
-        return redirect()->route('admin.show', $project->id);
+        return redirect()->route('admin.projects.show', $project->id);
     }
 
     /**
